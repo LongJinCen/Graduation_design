@@ -1,4 +1,4 @@
 export default {
-    login: '/ad/login',
-    register: '/ad/register'
+  login: '/ad/login',
+  register: '/ad/register'
 }

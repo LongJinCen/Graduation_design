@@ -13,7 +13,7 @@
 - [clean-webpack-plugin](https://github.com/johnagan/clean-webpack-plugin)
 - [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 - [vue-template-compiler](https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme)
-### 其他
+#### 其他
 - [webpack-merge](https://github.com/survivejs/webpack-merge)
 - [webpack-dev-server](https://github.com/webpack/webpack-dev-server#readme)
 ### Babel
@@ -43,6 +43,11 @@
 CSS 预处理器
 #### Plugin
 - [autoprefixer](https://github.com/postcss/autoprefixer#readme)
+
+### 代码校验工具
+- [standard](https://standardjs.com/)
+- [husky](https://github.com/typicode/husky#readme)
+- [lint-staged](https://github.com/okonet/lint-staged#readme)
 
 ### 其他工具
 - [axios](https://github.com/axios/axios)：http 请求库

@@ -1,8 +1,8 @@
 module.exports = {
-    development: {
-        publicPath: '/ad/'
-    },
-    production: {
-        publicPath: ''
-    }
+  development: {
+    publicPath: '/ad/'
+  },
+  production: {
+    publicPath: ''
+  }
 }

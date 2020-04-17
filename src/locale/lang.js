@@ -1,10 +1,10 @@
 export default {
-    zh: {
-        common: {
-            
-        },
-        gd: {
+  zh: {
+    common: {
 
-        }
+    },
+    gd: {
+
     }
+  }
 }

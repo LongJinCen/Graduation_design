@@ -1,7 +1,8 @@
-import vue from 'vue'
+import Vue from 'vue'
 import App from './index.vue'
 
-new vue({
-    el: document.getElementById('root'),
-    render: h => h(App)
+/* eslint-disable-next-line no-new */
+new Vue({
+  el: document.getElementById('root'),
+  render: h => h(App)
 })
