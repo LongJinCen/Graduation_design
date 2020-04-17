@@ -2,24 +2,34 @@ const files = require('../src/const/page.js')
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const env = process.env.NODE_ENV
+const config = require('./config.js')
 
 const entry = {}
+const htmlPlugin = []
 Object.keys(files).forEach(file => {
     entry[file] = path.resolve(__dirname, '../', files[file].path)
+    htmlPlugin.push(new HtmlWebpackPlugin({
+        title: files[file].title,
+        filename: `${file}.html`,
+        template: `./templete/templete.${env}.html`,
+        inject: false,
+        chunks: [file],
+    }))
 });
 
 module.exports = {
     mode: env,
     entry: entry,
     output: {
-        publicPath: 'http://127.0.0.1',
+        publicPath: config[env].publicPath,
         path: path.resolve(__dirname, '../dist'),
-        filename: '[name].[contenthash].js',
-        chunkFilename: '[id].[contenthash].js'
+        filename: `[name].[${env === 'development' ? 'hash' : 'contenthash'}].js`,
+        chunkFilename: `[id].[${env === 'development' ? 'hash' : 'contenthash'}].js`
     },
     plugins: [
+        ...htmlPlugin,
         new VueLoaderPlugin(),
         new CleanWebpackPlugin(),
     ],
@@ -45,7 +55,30 @@ module.exports = {
                             exclude: file => (
                                 /node_modules/.test(file) &&
                                 !/\.vue\.js/.test(file)
-                            )
+                            ),
+                            presets: [
+                                [
+                                    "@babel/env",
+                                    {
+                                        targets: {
+                                            edge: 17,
+                                            firefox: 60,
+                                            chrome: 58,
+                                            safari: 11.1,
+                                            ie: 11
+                                        }
+                                    }
+                                ],
+                                ["@vue/babel-preset-jsx"]
+                            ],
+                            plugins: [
+                                [
+                                    "@babel/plugin-transform-runtime",
+                                    {
+                                        corejs: 3
+                                    }
+                                ]
+                            ]
                         }
                     }
                 ]
