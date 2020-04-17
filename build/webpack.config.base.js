@@ -88,7 +88,7 @@ module.exports = {
                 loader: 'vue-loader'
             },
             {
-                test: /\.less$/i,
+                test: /\.(css|less)$/i,
                 use: ['vue-style-loader', 'css-loader', 'less-loader']
             }
         ]
@@ -97,5 +97,9 @@ module.exports = {
         alias: {
             '@': path.resolve(__dirname, '../src')
         }
+    },
+    externals: {
+        vue: 'Vue',
+        'element-ui': 'element-ui'
     }
 }
