@@ -13,5 +13,6 @@ export default {
         background-color: #F9F9F9;
         position: relative;
         height: 100vh;
+        padding: 50px;
     }
 </style>
