@@ -1,4 +1,5 @@
 import vue from 'vue'
+import '@/style/index.less'
 import App from './login.vue'
 
 new vue({

@@ -88,8 +88,18 @@ module.exports = {
                 loader: 'vue-loader'
             },
             {
-                test: /\.(css|less)$/i,
-                use: ['vue-style-loader', 'css-loader', 'less-loader']
+                test: /\.less$/i,
+                use: [
+                    'vue-style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2
+                        }
+                    },
+                    'less-loader',
+                    'postcss-loader'
+                ]
             }
         ]
     },

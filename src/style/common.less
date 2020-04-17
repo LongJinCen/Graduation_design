@@ -1,0 +1,31 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+}
+
+.link {
+    &:hover {
+        color: #2F88FF;
+        cursor: pointer;
+    }
+    &-active {
+        color: #2F88FF;
+        cursor: pointer;
+    }
+    &-blue-text {
+        color: #2a90d7;
+    }
+}
+
+.line {
+    display: inline-block;
+    height: 22px;
+    width: 1px;
+    border-left: 1px solid #E4E7ED;
+}

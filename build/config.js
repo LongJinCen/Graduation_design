@@ -1,6 +1,6 @@
 module.exports = {
     development: {
-        publicPath: '/assets/'
+        publicPath: '/ad/'
     },
     production: {
         publicPath: ''

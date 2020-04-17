@@ -1,6 +1,6 @@
 # Graduation_design
 ## 项目基本框架搭建
-### webpack
+### webpack（构建工具）
 #### loader
 - [babel-loader](https://github.com/babel/babel-loader)
 - [css-loader](https://github.com/webpack-contrib/css-loader)
@@ -13,7 +13,9 @@
 - [clean-webpack-plugin](https://github.com/johnagan/clean-webpack-plugin)
 - [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 - [vue-template-compiler](https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme)
+### 其他
 - [webpack-merge](https://github.com/survivejs/webpack-merge)
+- [webpack-dev-server](https://github.com/webpack/webpack-dev-server#readme)
 ### Babel
 - [@babel/cli](https://babeljs.io/)
 - [@babel/core](https://babeljs.io/)
@@ -32,3 +34,15 @@
 
 ### 前端框架
 - [Vue](https://cn.vuejs.org/)
+
+### 路由管理
+单页面加上多页面
+- [Vue-router](https://router.vuejs.org/zh/)
+
+### PostCSS
+CSS 预处理器
+#### Plugin
+- [autoprefixer](https://github.com/postcss/autoprefixer#readme)
+
+### 其他工具
+- [axios](https://github.com/axios/axios)：http 请求库
