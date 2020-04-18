@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "plugin:vue/essential",
+    "plugin:vue/strongly-recommended",
+    "plugin:vue/recommended"
+  ],
+  "rules": {
+    "vue/component-tags-order": [
+      "error",
+      {
+        "order": [
+          "template",
+          "script",
+          "style"
+        ]
+      }
+    ]
+  }
+}

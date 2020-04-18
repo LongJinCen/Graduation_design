@@ -1,11 +1,21 @@
 <template>
-    <div class="layout">
-        <slot/>
-    </div>
+  <div class="layout">
+    <slot />
+  </div>
 </template>
 <script>
 export default {
-    name: 'Layout'
+  name: 'Layout',
+  data () {
+    return {
+      name: 'value'
+    }
+  },
+  methods: {
+    test () {
+
+    }
+  }
 }
 </script>
 <style lang="less">

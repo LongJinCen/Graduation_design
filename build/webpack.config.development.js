@@ -9,7 +9,6 @@ module.exports = webpackMerge(baseConfig, {
     compress: true,
     hot: true,
     inline: true,
-    open: true,
     overlay: {
       warnings: true,
       errors: true

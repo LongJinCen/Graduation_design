@@ -1,13 +1,13 @@
 <template>
-    <div>
-        foget
-    </div>
+  <div>
+    foget
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'Forget'
-    }
+export default {
+  name: 'Forget'
+}
 </script>
 
 <style lang="less" scoped>

@@ -46,8 +46,10 @@ CSS 预处理器
 
 ### 代码校验工具
 - [standard](https://standardjs.com/)
+- [standardx](https://github.com/standard/standardx)
 - [husky](https://github.com/typicode/husky#readme)
 - [lint-staged](https://github.com/okonet/lint-staged#readme)
-
+- [eslint](https://github.com/eslint/eslint)
+- [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue)
 ### 其他工具
 - [axios](https://github.com/axios/axios)：http 请求库
