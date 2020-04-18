@@ -1,7 +1,6 @@
 <template>
-  <div class="login">
-    <span key="1">方法</span>
-    <span key="1">放到</span>
+  <div class="index">
+    <span>longjincen</span>
   </div>
 </template>
 <script>
@@ -15,7 +14,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-    .login {
+    .index {
 
     }
 </style>

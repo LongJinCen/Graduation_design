@@ -6,13 +6,17 @@
 - [css-loader](https://github.com/webpack-contrib/css-loader)
 - [file-loader](https://github.com/webpack-contrib/file-loader)
 - [less-loader](https://github.com/webpack-contrib/less-loader)
+- [postcss-loader](https://github.com/postcss/postcss-loader#readme)
 - [url-loader](https://github.com/webpack-contrib/url-loader)
 - [vue-loader](https://github.com/vuejs/vue-loader)
 - [vue-style-loader](https://github.com/vuejs/vue-style-loader#readme)
+- [eslint-loader](https://github.com/webpack-contrib/eslint-loader)
 #### plugin
 - [clean-webpack-plugin](https://github.com/johnagan/clean-webpack-plugin)
 - [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 - [vue-template-compiler](https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme)
+- [eslint-plugin-vue](https://eslint.vuejs.org/)
+- [stylelint-webpack-plugin](https://github.com/webpack-contrib/stylelint-webpack-plugin)
 #### 其他
 - [webpack-merge](https://github.com/survivejs/webpack-merge)
 - [webpack-dev-server](https://github.com/webpack/webpack-dev-server#readme)
@@ -39,6 +43,8 @@
 单页面加上多页面
 - [Vue-router](https://router.vuejs.org/zh/)
 
+### Less
+- [less](http://lesscss.org/)
 ### PostCSS
 CSS 预处理器
 #### Plugin
@@ -51,5 +57,7 @@ CSS 预处理器
 - [lint-staged](https://github.com/okonet/lint-staged#readme)
 - [eslint](https://github.com/eslint/eslint)
 - [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-vue)
+- [stylelint](https://stylelint.io/)
+- [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard#readme)
 ### 其他工具
 - [axios](https://github.com/axios/axios)：http 请求库

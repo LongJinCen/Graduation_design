@@ -175,60 +175,71 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-    .login {
-        background-color: #ffffff;
-        padding: 24px 31px 50px 31px;
-        &-way {
-            margin-bottom: 20px;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-around;
-            color: #444444;
-            & > span {
-                cursor: pointer;
-            }
-        }
-        &-verifycode {
-            background-color: #409eff !important;
-            color: #ffffff !important;
-            border-radius: 0px !important;
-            &:hover {
-                background-color: #66b1ff !important;
-            }
-        }
-        &-verifyingcode {
-            width: 112px;
-            height: 38px;
-            &:hover {
-                background-color: transparent !important;
-            }
-        }
-        &-agreement {
-            text-align: center;
-            color: #999999;
-            font-size: 14px;
-            margin-top: 40px;
-            margin-bottom: 10px;
-            a {
-                text-decoration: none;
-                color: #2a90d7;
-                cursor: pointer;
-            }
-        }
-        &-other {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 70px;
-            font-size: 12px;
-            color: #444444;
-            margin-top: 10px;
-        }
+  .login {
+    background-color: #fff;
+    padding: 24px 31px 50px 31px;
+
+    &-way {
+      margin-bottom: 20px;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-around;
+      color: #444;
+
+      & > span {
+        cursor: pointer;
+      }
     }
-    .el-form {
-        width: 380px;
-        border-radius: 4px;
+
+    &-verifycode {
+      background-color: #409eff !important;
+      color: #fff !important;
+      border-radius: 0 !important;
+
+      &:hover {
+        background-color: #66b1ff !important;
+      }
     }
-    .el-button--primary {
-        width: 100%;
+
+    &-verifyingcode {
+      width: 112px;
+      height: 38px;
+
+      &:hover {
+        background-color: transparent !important;
+      }
     }
+
+    &-agreement {
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+      margin-top: 40px;
+      margin-bottom: 10px;
+
+      a {
+        text-decoration: none;
+        color: #2a90d7;
+        cursor: pointer;
+      }
+    }
+
+    &-other {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 70px;
+      font-size: 12px;
+      color: #444;
+      margin-top: 10px;
+    }
+  }
+
+  .el-form {
+    width: 380px;
+    border-radius: 4px;
+  }
+
+  .el-button--primary {
+    width: 100%;
+  }
 </style>

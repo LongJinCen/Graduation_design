@@ -3,8 +3,10 @@ const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const env = process.env.NODE_ENV
+const StyleLintPlugin = require('stylelint-webpack-plugin')
 const config = require('./config.js')
+
+const env = process.env.NODE_ENV
 
 const entry = {}
 const htmlPlugin = []
@@ -31,7 +33,10 @@ module.exports = {
   plugins: [
     ...htmlPlugin,
     new VueLoaderPlugin(),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new StyleLintPlugin({
+      files: ['**/*.{vue,htm,html,css,sss,less,scss,sass}']
+    })
   ],
   module: {
     rules: [
@@ -55,30 +60,7 @@ module.exports = {
               exclude: file => (
                 /node_modules/.test(file) &&
                                 !/\.vue\.js/.test(file)
-              ),
-              presets: [
-                [
-                  '@babel/env',
-                  {
-                    targets: {
-                      edge: 17,
-                      firefox: 60,
-                      chrome: 58,
-                      safari: 11.1,
-                      ie: 11
-                    }
-                  }
-                ],
-                ['@vue/babel-preset-jsx']
-              ],
-              plugins: [
-                [
-                  '@babel/plugin-transform-runtime',
-                  {
-                    corejs: 3
-                  }
-                ]
-              ]
+              )
             }
           }
         ]

@@ -353,75 +353,91 @@ export default {
 </script>
 
 <style lang="less" scoped>
-    .register {
-        display: inline-block;
-        width: 70%;
-        margin-top: 50px;
-        &-success {
-            text-align: center;
-            font-size: 20px;
-            color: #303133;
-        }
-        .form {
-            width: 50%;
-            margin: 0 auto;
-            margin-top: 50px;
-        }
-        &-verifycode {
-            background-color: #409eff !important;
-            color: #ffffff !important;
-            border-radius: 0px !important;
-            &:hover {
-                background-color: #66b1ff !important;
-            }
-        }
-        &-verifyingcode {
-            width: 112px;
-            height: 38px;
-            &:hover {
-                background-color: transparent !important;
-            }
-        }
-        .el-button--primary {
-            width: 80%;
-            margin-left: 100px;
-        }
-        &-type {
-            margin-bottom: 35px;
-            & > span:first-of-type {
-                margin-left: 100px;
-            }
-            & > span {
-                cursor: pointer;
-                margin-right: 20px;
-                font-size: 16px;
-                position: relative;
-                & > span {
-                    transition: width .5s ease;
-                    position: absolute;
-                    left: 0px;
-                    bottom: -2px;
-                    display: inline-block;
-                    height: 2px;
-                }
-            }
-            &-default {
-                color: #333333;
-                span {
-                    width: 0px;
-                    background-color: transparent;
-                }
-            }
-            &-active {
-                color: rgb(47, 136, 255);
-                span {
-                    background-color: rgb(47, 136, 255);
-                    width: 100%;
-                }
-            }
-        }
+  .register {
+    display: inline-block;
+    width: 70%;
+    margin-top: 50px;
+
+    &-success {
+      text-align: center;
+      font-size: 20px;
+      color: #303133;
     }
-    .default-color {
-        color: #606266 !important;
+
+    .form {
+      width: 50%;
+      margin: 0 auto;
+      margin-top: 50px;
     }
+
+    &-verifycode {
+      background-color: #409eff !important;
+      color: #fff !important;
+      border-radius: 0 !important;
+
+      &:hover {
+        background-color: #66b1ff !important;
+      }
+    }
+
+    &-verifyingcode {
+      width: 112px;
+      height: 38px;
+
+      &:hover {
+        background-color: transparent !important;
+      }
+    }
+
+    .el-button--primary {
+      width: 80%;
+      margin-left: 100px;
+    }
+
+    &-default {
+      color: #333;
+
+      span {
+        width: 0;
+        background-color: transparent;
+      }
+    }
+
+    &-active {
+      color: rgb(47, 136, 255);
+
+      span {
+        background-color: rgb(47, 136, 255);
+        width: 100%;
+      }
+    }
+
+    &-type {
+      margin-bottom: 35px;
+
+      & > span {
+        cursor: pointer;
+        margin-right: 20px;
+        font-size: 16px;
+        position: relative;
+
+        & > span {
+          transition: width 0.5s ease;
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          display: inline-block;
+          height: 2px;
+        }
+      }
+
+      & > span:first-of-type {
+        margin-left: 100px;
+      }
+    }
+  }
+
+  .default-color {
+    color: #606266 !important;
+  }
 </style>
