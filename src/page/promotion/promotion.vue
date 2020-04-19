@@ -1,11 +1,11 @@
 <template>
   <div>
-    foget
+    fdsfdsf
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Forget'
+  name: 'Promotion'
 }
 </script>

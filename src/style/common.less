@@ -7,11 +7,64 @@ a {
   text-decoration: none;
 }
 
-.center {
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.flex {
+  display: flex;
+}
+
+.absolute-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
+}
+
+.absolute-vertical-center {
+  position: absolute;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+}
+
+.absolute-horizontal-center {
+  position: absolute;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-horizontal-center {
+  justify-content: center;
+}
+
+.flex-horizontal-between {
+  justify-content: space-between;
+}
+
+.flex-horizontal-around {
+  justify-content: space-around;
+}
+
+.flex-vertical-center {
+  align-items: center;
 }
 
 .horizontal-center {
@@ -26,12 +79,12 @@ a {
 
 .link {
   &:hover {
-    color: #2f88ff;
+    color: @font-bule;
     cursor: pointer;
   }
 
   &-active {
-    color: #2f88ff;
+    color: @font-bule;
     cursor: pointer;
   }
 
@@ -45,4 +98,26 @@ a {
   height: 22px;
   width: 1px;
   border-left: 1px solid #e4e7ed;
+}
+
+.clear-float {
+  &::after {
+    display: block;
+    content: '';
+    clear: both;
+  }
+}
+
+.one-line-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.text-center {
+  text-align: center;
 }

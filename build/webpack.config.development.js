@@ -9,10 +9,10 @@ module.exports = webpackMerge(baseConfig, {
     compress: true,
     hot: true,
     inline: true,
-    overlay: {
-      warnings: true,
-      errors: true
-    },
+    // overlay: {
+    //   warnings: true,
+    //   errors: true
+    // },
     port: 8888,
     host: '127.0.0.1',
     openPage: `${config.development.publicPath.slice(1)}index.html`

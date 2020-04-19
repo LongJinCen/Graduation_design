@@ -19,10 +19,12 @@ export default {
 }
 </script>
 <style lang="less">
-  .layout {
-    background-color: #f9f9f9;
-    position: relative;
-    height: 100vh;
-    padding: 50px;
-  }
+@import "../../style/variable.less";
+
+.layout {
+  background-color: @bg-color;
+  position: relative;
+  height: 100vh;
+  padding: 50px;
+}
 </style>

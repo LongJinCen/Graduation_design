@@ -1,5 +1,5 @@
 <template>
-  <div class="login center">
+  <div class="login absolute-center">
     <div class="login-way">
       <span
         :class="emailWayClass"

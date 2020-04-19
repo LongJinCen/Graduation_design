@@ -4,5 +4,8 @@ module.exports = {
   },
   index: {
     path: './src/page/index/index.js'
+  },
+  promotion: {
+    path: './src/page/promotion/promotion.js'
   }
 }
