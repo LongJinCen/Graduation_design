@@ -5,17 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'Layout',
-  data () {
-    return {
-      name: 'value'
-    }
-  },
-  methods: {
-    test () {
-
-    }
-  }
+  name: 'Layout'
 }
 </script>
 <style lang="less">
