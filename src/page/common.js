@@ -110,3 +110,11 @@ export const adStatus = {
   [adStatusKey.audited]: '审核通过',
   [adStatusKey.reject]: '审核拒绝'
 }
+
+export const convertTargetKey = {
+  access: 1
+}
+
+export const convertTarget = {
+  [convertTargetKey.access]: '点击访问'
+}

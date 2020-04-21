@@ -7,5 +7,8 @@ module.exports = {
   },
   promotion: {
     path: './src/page/promotion/promotion.js'
+  },
+  creative: {
+    path: './src/page/creative/creative.js'
   }
 }
