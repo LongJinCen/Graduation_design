@@ -152,6 +152,7 @@ export default {
       this.timer = setInterval(() => {
         if (this.second === 1) {
           clearInterval(this.timer)
+          this.timer = null
           this.verifying = false
           this.second = 60
           return
