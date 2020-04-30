@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <navigator />
     <div class="index">
       <div class="index-part1 index-common flex flex-vertical-center">
         <div class="index-part1-info relative clear-float">
@@ -145,11 +146,13 @@
 </template>
 <script>
 import Layout from '@/component/layout/layout.vue'
+import Navigator from '@/component/navigator/navigator.vue'
 import { dateRangeKey, dateOptions, adIndicators } from '@/page/common.js'
 export default {
   name: 'Login',
   components: {
-    Layout
+    Layout,
+    Navigator
   },
   data () {
     return {
