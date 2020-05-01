@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <navigator />
     <div class="creative">
       <div class="creative-common creative-baseinfo">
         <div class="creative-common-title">
@@ -87,6 +88,7 @@
                 :on-preview="handlePictureCardPreview"
                 :on-remove="handleRemove"
                 :on-success="handleSuccess"
+                :file-list="detail.fileList"
                 :limit="1"
                 action="#"
               >
@@ -129,12 +131,14 @@
 
 <script>
 import Layout from '@/component/layout/layout.vue'
+import Navigator from '@/component/navigator/navigator.vue'
 import * as tool from '@/util/tool.js'
 import { convertTargetKey, convertTarget } from '@/page/common.js'
 export default {
   name: 'Creative',
   components: {
-    Layout
+    Layout,
+    Navigator
   },
   data () {
     return {
@@ -149,7 +153,8 @@ export default {
         creative: {
           title: '',
           description: ''
-        }
+        },
+        fileList: []
       },
       rules: {
         name: [{ required: true, message: '请输入名称', trigger: 'blur' }],
@@ -169,8 +174,15 @@ export default {
   },
   mounted () {
     this.getQuery()
+    this.getDetail()
   },
   methods: {
+    getDetail () {
+      if (this.query.mode === 'create') {
+
+      }
+      // TODO: 调用接口获取信息
+    },
     getQuery () {
       this.query = tool.getQuery(location.search)
     },
@@ -181,7 +193,16 @@ export default {
     handleRemove (file, fileList) {
     },
     handleSuccess (response, file, fileList) {
+      console.log(response)
+    },
+    async submit () {
+      const valid1 = await this.$refs.form1.validate()
+      const valid2 = await this.$refs.form2.validate()
+      if (!valid1 || !valid2) {
 
+      }
+      // TODO: 调用接口发送数据
+      location.href = '/ad/promotion.html'
     }
   }
 }
@@ -232,5 +253,9 @@ export default {
       float: right;
     }
   }
+}
+
+.layout {
+  padding: 120px;
 }
 </style>

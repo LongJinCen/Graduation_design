@@ -4,7 +4,10 @@
     <div class="index">
       <div class="index-part1 index-common flex flex-vertical-center">
         <div class="index-part1-info relative clear-float">
-          <img class="img absolute-vertical-center">
+          <img
+            :src="userIcon"
+            class="img absolute-vertical-center"
+          >
           <div class="account absolute-vertical-center">
             <div class="one-line-overflow">
               {{ account.username }}
@@ -59,6 +62,7 @@
         <el-button
           type="primary"
           class="index-part1-new absolute-vertical-center"
+          @click="newAd"
         >
           <i class="el-icon-plus" />
           新建广告
@@ -114,6 +118,7 @@
           <el-select
             v-model="adDataDate"
             size="mini"
+            @change="getAdIndicators"
           >
             <el-option
               v-for="item in dateOptions"
@@ -148,6 +153,7 @@
 import Layout from '@/component/layout/layout.vue'
 import Navigator from '@/component/navigator/navigator.vue'
 import { dateRangeKey, dateOptions, adIndicators } from '@/page/common.js'
+import userIcon from '../../../assets/userIcon.svg'
 export default {
   name: 'Login',
   components: {
@@ -177,7 +183,23 @@ export default {
         clickRate: 0,
         convertNums: 0,
         convertRate: 0
-      }
+      },
+      userIcon
+    }
+  },
+  mounted () {
+    this.getAccountData()
+    this.getAdIndicators()
+  },
+  methods: {
+    getAccountData () {
+      // TODO: 发送接口获取帐户信息
+    },
+    getAdIndicators (value) {
+      // TODO: 获取广告各项指标
+    },
+    newAd () {
+      location.href = '/ad/promotion.html'
     }
   }
 }
@@ -216,11 +238,11 @@ export default {
     &-info {
       .img {
         display: inline-block;
-        width: 42px;
-        height: 42px;
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
+        border: 1px solid;
         overflow: hidden;
-        border: 1px solid red;
       }
 
       .account {

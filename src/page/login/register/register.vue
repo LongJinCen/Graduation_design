@@ -112,7 +112,7 @@
                 slot="append"
                 :class="verifycodeClass"
                 :disabled="verifying"
-                @click="getVerifyCodeByPhone"
+                @click="getVerifyCodeByEmail"
               >
                 {{
                   verifying ? second + 's 后刷新' : '发送验证码'
@@ -194,17 +194,10 @@
           prop="industry"
           label="行业"
         >
-          <el-select
+          <el-cascader
             v-model="form.industry"
-            placeholder="请选择"
-          >
-            <el-option
-              v-for="item in industrys"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            />
-          </el-select>
+            :options="industrys"
+          />
         </el-form-item>
         <el-form-item prop="agree">
           <el-checkbox v-model="form.agree">
@@ -239,8 +232,9 @@
 </template>
 
 <script>
-// import * as regexp from '@/const/regexp.js'
+import * as regexp from '@/const/regexp.js'
 // import rules from '../common/rule.js'
+import industrys from '@/const/industry.js'
 export default {
   name: 'Register',
   data () {
@@ -269,7 +263,7 @@ export default {
       timer: null,
       verifying: false,
       second: 60,
-      industrys: []
+      industrys
     }
   },
   computed: {
@@ -277,10 +271,10 @@ export default {
       return this.verifying ? ['register-verifyingcode'] : ['register-verifycode']
     },
     registerEmailType () {
-      return this.curRegisterType === 'email' ? ['register-type-active', 'register-type-animationIn'] : ['register-type-default', 'register-type-animationOut']
+      return this.curRegisterType === 'email' ? ['register-type-active'] : ['register-type-default']
     },
     registerPhoneType () {
-      return this.curRegisterType === 'phone' ? ['register-type-active', 'register-type-animationIn'] : ['register-type-default', 'register-type-animationOut']
+      return this.curRegisterType === 'phone' ? ['register-type-active'] : ['register-type-default']
     }
   },
   methods: {
@@ -294,12 +288,25 @@ export default {
       if (!valid) {
         return
       }
-      // TODO: 调用 api 进行验证码判断，如果正确那么就继续下一步，不正确给出验证码错误的提示
-      // const verifycodeConfirm = await axios.xxxx
-      // if(!verifycodeConfirm) return
-      this.resetFormData()
-      this.resetTimer()
-      this.formNext()
+      let promise = null
+      if (this.active === 0) {
+        promise = this.registerWithPhone()
+      }
+      if (this.active === 1) {
+        if (this.curRegisterType === 'phone') {
+          promise = this.registerWithPhone()
+        } else if (this.curRegisterType === 'email') {
+          promise = this.registerWithEmail()
+        }
+      }
+      if (this.active === 2) {
+        promise = this.setAccountInfo()
+      }
+      promise.then(() => {
+        this.resetFormData()
+        this.resetTimer()
+        this.formNext()
+      }).catch(() => {})
     },
     resetFormData () {
       this.form = {
@@ -325,13 +332,54 @@ export default {
     },
     formNext () {
       this.active = this.active === 3 ? 3 : this.active + 1
-      console.log(this.active, 'active')
       if (this.active === 3) {
         window.location.href = '/ad/index.html'
       }
     },
     getVerifyCodeByPhone () {
+      if (this.form.phoneNumber.length === 0) {
+        this.$message({
+          message: '请输入手机号',
+          type: 'warning'
+        })
+        return
+      }
+      if (!regexp.phoneNumber.test(this.form.phoneNumber)) {
+        this.$message({
+          message: '手机号格式不正确',
+          type: 'warning'
+        })
+        return
+      }
       this.countdown()
+      this.getVerifycode()
+    },
+    getVerifyCodeByEmail () {
+      if (this.form.email.length === 0) {
+        this.$message({
+          message: '请输入邮箱',
+          type: 'warning'
+        })
+        return
+      }
+      if (!regexp.email.test(this.form.phoneNumber)) {
+        this.$message({
+          message: '邮箱格式不正确',
+          type: 'warning'
+        })
+        return
+      }
+      this.countdown()
+      this.getVerifycode()
+    },
+    getVerifycode () {
+      // TODO: 调用接口获取验证码
+      if (this.curRegisterType === 'phone') {
+
+      }
+      if (this.curRegisterType === 'email') {
+
+      }
     },
     countdown () {
       if (this.timer) {
@@ -341,12 +389,44 @@ export default {
       this.timer = setInterval(() => {
         if (this.second === 1) {
           clearInterval(this.timer)
+          this.timer = null
           this.verifying = false
           this.second = 60
           return
         }
         this.second = this.second - 1
       }, 1000)
+    },
+    registerWithPhone () {
+      const data = {}
+      data.phoneNumber = this.form.phoneNumber
+      data.verifycode = this.form.verifycode
+      // TODO: 调用接口
+      return Promise.resolve()
+    },
+    registerWithEmail () {
+      const data = {}
+      data.email = this.form.email
+      data.password = this.form.password
+      data.confirmPassword = this.form.confirmPassword
+      data.verifycode = this.form.verifycode
+      if (data.password.trim() !== data.confirmPassword.trim()) {
+        this.$message({
+          message: '密码不一致',
+          type: 'warning'
+        })
+        // eslint-disable-next-line
+        return Promise.reject()
+      }
+      // TODO: 调用接口
+      return Promise.resolve()
+    },
+    setAccountInfo () {
+      const data = {}
+      data.accountName = this.form.accountName
+      data.industry = this.form.industry
+      // TODO: 调用接口
+      return Promise.resolve()
     }
   }
 }
@@ -394,26 +474,26 @@ export default {
       margin-left: 100px;
     }
 
-    &-default {
-      color: #333;
-
-      span {
-        width: 0;
-        background-color: transparent;
-      }
-    }
-
-    &-active {
-      color: rgb(47, 136, 255);
-
-      span {
-        background-color: rgb(47, 136, 255);
-        width: 100%;
-      }
-    }
-
     &-type {
       margin-bottom: 35px;
+
+      &-default {
+        color: #333;
+
+        span {
+          width: 0;
+          background-color: transparent;
+        }
+      }
+
+      &-active {
+        color: rgb(47, 136, 255);
+
+        span {
+          background-color: rgb(47, 136, 255);
+          width: 100%;
+        }
+      }
 
       & > span {
         cursor: pointer;

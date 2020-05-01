@@ -115,6 +115,25 @@ export default {
   },
   methods: {
     getVerifyCodeByPhone () {
+      if (this.form.phoneOrEmail.indexOf('@')) {
+        if (!regexp.email.test(this.form.phoneOrEmail)) {
+          this.$message({
+            message: '邮箱格式不正确',
+            type: 'warning'
+          })
+          return
+        }
+        this.getVerifycode('email')
+      } else {
+        if (!regexp.phoneNumber.test(this.form.phoneOrEmail)) {
+          this.$message({
+            message: '手机号格式不正确',
+            type: 'warning'
+          })
+          return
+        }
+        this.getVerifycode('phone')
+      }
       this.countdown()
     },
     countdown () {
@@ -134,13 +153,22 @@ export default {
       }, 1000)
     },
     submit () {
-      this.showSuccess = true
-      this.goLogin()
+      this.$refs.form.validate((valid) => {
+        if (!valid) {
+          return
+        }
+        // TODO: 发借口获取修改数据
+        this.showSuccess = true
+        this.goLogin()
+      })
     },
     goLogin () {
       setTimeout(() => {
         window.location.href = '/ad/login.html#/'
       }, 2000)
+    },
+    getVerifycode (type) {
+      // TODO: 发借口获取验证码
     }
   }
 }

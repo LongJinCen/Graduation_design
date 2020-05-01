@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <navigator />
     <div class="promotion">
       <div class="promotion-header flex flex-vertical-center">
         <span class="text">
@@ -18,6 +19,7 @@
             type="primary"
             class="float-left"
             size="small"
+            @click="newCreative"
           >
             <i class="el-icon-plus" />
             新建创意
@@ -33,6 +35,7 @@
             end-placeholder="结束日期"
             :picker-options="pickerOptions"
             class="float-right"
+            @change="dateChange"
           />
         </div>
         <el-table
@@ -110,11 +113,13 @@
 
 <script>
 import Layout from '@/component/layout/layout.vue'
+import Navigator from '@/component/navigator/navigator.vue'
 import { dateRange, dateLabel, dateRangeKey, adIndicators, adStatus, adStatusKey } from '@/page/common.js'
 export default {
   name: 'Promotion',
   components: {
-    Layout
+    Layout,
+    Navigator
   },
   data () {
     return {
@@ -209,15 +214,38 @@ export default {
       }
     }
   },
+  mounted () {
+    this.getAccountData()
+    this.getTableData()
+  },
   methods: {
+    dateChange () {
+      this.getTableData()
+    },
+    newCreative () {
+      window.open('/ad/creative.html?mode=create')
+    },
+    getAccountData () {
+      // TODO: 发送接口获取帐户信息
+    },
+    getTableData () {
+      // TODO: 获取 tabledata
+    },
     sortChange (prop, sort) {
       console.log(prop, sort)
+      this.getTableData()
     },
     edit (row) {
-
+      window.open(`/ad/creative.html?mode=edit&id=${row.id}`)
     },
     del (row) {
+      this.$confirm('确认删除？')
+        .then(() => {
+          // TODO:调用删除接口
+        })
+        .catch(() => {
 
+        })
     }
   }
 }

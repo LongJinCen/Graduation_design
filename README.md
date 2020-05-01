@@ -62,3 +62,7 @@ CSS 预处理器
 ### 其他工具
 - [axios](https://github.com/axios/axios)：http 请求库
 - [moment](http://momentjs.com/)：时间处理库
+
+### 微前端架构
+- 将 navigator 单独打包并通过 script 引入，如需更新，修改版本号即可。
+- TODO: 通过一个config.(version).js配置文件去控制整个项目的路由。配置文件根据 webpack(config).run() 得到的打包信息生成。项目如需更新或者回退，直接修改version即可.

@@ -6,17 +6,17 @@
     <div class="navigator-menu">
       <span
         :class="indexClass"
-        @click="changeActiveIndex('index')"
+        @click="redirect('index')"
       >首页</span>
       <span
         :class="promotionClass"
-        @click="changeActiveIndex('promotion')"
+        @click="redirect('promotion')"
       >推广</span>
     </div>
     <div class="navigator-user">
       <el-dropdown @command="accountOperation">
         <div class="navigator-userinfo">
-          <img src="">
+          <img :src="userIcon">
           <div class="navigator-userinfo-detail">
             <span class="one-line-overflow">{{ account.name }}</span>
             <span class="one-line-overflow">ID：{{ account.id }}</span>
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import userIcon from '../../../assets/userIcon1.svg'
+
 export default {
   name: 'Navigator',
   data () {
@@ -41,7 +43,8 @@ export default {
       account: {
         name: 'longjincen',
         id: 1234
-      }
+      },
+      userIcon
     }
   },
   computed: {
@@ -53,10 +56,18 @@ export default {
     }
   },
   mounted () {
+    this.checkLogin()
     this.confirmPage()
+    this.getAccountData()
   },
   methods: {
-    changeActiveIndex (type) {
+    checkLogin() {
+      // TODO: 调用接口判断是否登录，如果未登录重定向到登录页
+    },
+    getAccountData() {
+      // TODO: 发送接口获取帐户信息
+    },
+    redirect (type) {
       switch (type) {
         case 'index':
           this.activeIndex = 1
@@ -65,6 +76,9 @@ export default {
         case 'promotion':
           this.activeIndex = 2
           location.href = '/ad/promotion.html'
+          break
+        case 'login':
+          location.href = '/ad/login.html'
           break
         default:
           break
@@ -84,7 +98,14 @@ export default {
       }
     },
     accountOperation (command) {
-      console.log(command)
+      switch (command) {
+        case 'loginOut':
+          // TODO: 调用接口退出登录
+          this.redirect('login')
+          break;
+        default:
+          break;
+      }
     }
   }
 }
@@ -151,8 +172,9 @@ export default {
       height: 30px;
       border-radius: 50%;
       overflow: hidden;
-      border: 1px solid red;
+      border: 1px solid #d6d6d6;
       margin-right: 10px;
+      background-color: rgb(35, 50, 74);
     }
 
     &-detail {

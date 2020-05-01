@@ -15,6 +15,6 @@ export default {
   background-color: @bg-color;
   position: relative;
   height: 100vh;
-  padding: 50px;
+  padding: 65px;
 }
 </style>

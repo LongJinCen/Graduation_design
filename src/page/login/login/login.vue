@@ -19,7 +19,7 @@
     </div>
     <el-form
       v-show="emailLogin"
-      ref="Form"
+      ref="Form1"
       :model="form"
       :rules="rules"
     >
@@ -39,7 +39,7 @@
     </el-form>
     <el-form
       v-show="phoneLogin"
-      ref="Form"
+      ref="Form2"
       :model="form"
       :rules="rules"
     >
@@ -76,7 +76,10 @@
         class="link link-blue-text"
       >隐私政策</a>
     </div>
-    <el-button type="primary">
+    <el-button
+      type="primary"
+      @click="login"
+    >
       登录
     </el-button>
     <div class="login-other">
@@ -94,6 +97,7 @@
 </template>
 <script>
 import rules from '../common/rule.js'
+import * as regexp from '@/const/regexp.js'
 export default {
   name: 'Login',
   data () {
@@ -128,10 +132,31 @@ export default {
       return this.verifying ? ['login-verifyingcode'] : ['login-verifycode']
     }
   },
-  mounted () {
-    this.getVerifyCode()
-  },
   methods: {
+    login () {
+      let formType = ''
+      const data = {}
+      if (this.emailLogin) {
+        formType = 'Form1'
+        data.email = this.form.email
+        data.password = this.form.password
+      }
+      if (this.phoneLogin) {
+        formType = 'Form2'
+        data.verifycode = this.form.verifycode
+        data.phoneNumber = this.form.phoneNumber
+      }
+      this.$refs[formType].validate((valid) => {
+        if (!valid) {
+          return
+        }
+        // TODO: 调用登录接口
+        this.redirectToIndex()
+      })
+    },
+    redirectToIndex () {
+      window.location.href = '/ad/index.html'
+    },
     register () {
       this.$router.push('/register')
     },
@@ -139,10 +164,25 @@ export default {
       this.$router.push('/forget')
     },
     getVerifyCode () {
-
+      // TODO: 发借口获取验证码
     },
     getVerifyCodeByPhone () {
+      if (this.form.phoneNumber.length === 0) {
+        this.$message({
+          message: '请输入手机号',
+          type: 'warning'
+        })
+        return
+      }
+      if (!regexp.phoneNumber.test(this.form.phoneNumber)) {
+        this.$message({
+          message: '手机号格式不正确',
+          type: 'warning'
+        })
+        return
+      }
       this.countdown()
+      this.getVerifyCode()
     },
     countdown () {
       if (this.timer) {
