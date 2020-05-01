@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "npm run format && NODE_ENV=development webpack-dev-server --progress --color --config build/webpack.config.development.js",
     "format": "standardx --fix",
-    "build": "npm run format && NODE_ENV=production webpack --config build/webpack.config.production.js"
+    "build": "npm run format && NODE_ENV=production webpack --config build/webpack.config.production.js",
+    "navigator": "node build/webpack.config.navigator.js"
   },
   "repository": {
     "type": "git",
@@ -71,6 +72,7 @@
     "ignore": [
       "node_modules/",
       "dist/",
+      "navigator/",
       ".browserslistrc",
       ".gitignore",
       "package-lock.json",

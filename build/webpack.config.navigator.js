@@ -1,37 +1,21 @@
-const files = require('../src/const/page.js')
+const webpack = require('webpack')
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
-const config = require('./config.js')
 
-const env = process.env.NODE_ENV
+const version = '1.0.0'
 
-const entry = {}
-const htmlPlugin = []
-Object.keys(files).forEach(file => {
-  entry[file] = path.resolve(__dirname, '../', files[file].path)
-  htmlPlugin.push(new HtmlWebpackPlugin({
-    title: files[file].title,
-    filename: `${file}.html`,
-    template: `./templete/templete.${env}.html`,
-    inject: false,
-    chunks: [file],
-    file: file
-  }))
-})
-module.exports = {
-  mode: env,
-  entry: entry,
+const webpackConfig = {
+  mode: 'production',
+  entry: {
+    navigator: path.resolve(__dirname, '../src/component/navigator/navigator.js')
+  },
   output: {
-    publicPath: config[env].publicPath,
-    path: path.resolve(__dirname, '../dist'),
-    filename: `[name].[${env === 'development' ? 'hash' : 'contenthash'}].js`,
-    chunkFilename: `[id].[${env === 'development' ? 'hash' : 'contenthash'}].js`
+    path: path.resolve(__dirname, '../navigator'),
+    filename: `[name].${version}.js`
   },
   plugins: [
-    ...htmlPlugin,
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
     new StyleLintPlugin({
@@ -101,3 +85,25 @@ module.exports = {
     'element-ui': 'element-ui'
   }
 }
+
+const complier = webpack(webpackConfig)
+
+complier.run((err, stats) => {
+  if (err) {
+    console.error(err.stack || err)
+    if (err.details) {
+      console.error(err.details)
+    }
+    return
+  }
+
+  const info = stats.toJson()
+
+  if (stats.hasErrors()) {
+    console.error(info.errors)
+  }
+
+  if (stats.hasWarnings()) {
+    console.warn(info.warnings)
+  }
+})

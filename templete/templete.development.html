@@ -12,6 +12,10 @@
 </head>
 <body>
     <div id="root"></div>
+    <% if (htmlWebpackPlugin.options.file !== 'login') { %>
+        <div id="navigator-instance"></div>
+        <script src="file:///Users/longjincen/Desktop/code/Graduation_design/navigator/navigator.1.0.0.js"></script>
+    <% } %>
     <%= htmlWebpackPlugin.tags.bodyTags %>
 </body>
 </html>

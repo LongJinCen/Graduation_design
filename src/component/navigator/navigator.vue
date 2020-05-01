@@ -84,7 +84,7 @@ export default {
       }
     },
     accountOperation (command) {
-
+      console.log(command)
     }
   }
 }
