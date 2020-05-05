@@ -34,6 +34,8 @@
 
 <script>
 import userIcon from '../../../assets/userIcon1.svg'
+import axios from 'axios'
+import apis from '@/const/api.js'
 
 export default {
   name: 'Navigator',
@@ -56,16 +58,14 @@ export default {
     }
   },
   mounted () {
-    this.checkLogin()
     this.confirmPage()
     this.getAccountData()
   },
   methods: {
-    checkLogin() {
-      // TODO: 调用接口判断是否登录，如果未登录重定向到登录页
-    },
     getAccountData() {
-      // TODO: 发送接口获取帐户信息
+      axios.get(apis.user.account).then((data) => {
+        console.log(data)
+      })
     },
     redirect (type) {
       switch (type) {
@@ -100,8 +100,13 @@ export default {
     accountOperation (command) {
       switch (command) {
         case 'loginOut':
-          // TODO: 调用接口退出登录
-          this.redirect('login')
+          axios.post(apis.user.loginOut).then((data) => {
+            if (data.code === 0) {
+              this.redirect('login')
+            } else {
+              this.$message(data.message)
+            }
+          })
           break;
         default:
           break;

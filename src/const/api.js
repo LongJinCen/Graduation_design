@@ -1,21 +1,20 @@
 export default {
-  login: {
-    isLogin: '/ad/login/islogin',
-    loginWithEmail: '/ad/login/email',
-    loginWithPhone: '/ad/login/phone'
+  user: {
+    loginWithEmail: '/ad/user/login_email',
+    loginWithPhone: '/ad/user/login_phone',
+    loginOut: '/ad/user/login_out',
+    registerWithPhone: '/ad/user/register/phone',
+    registerWithEmail: '/ad/user/register/email',
+    setInfo: '/ad/user/register/setInfo',
+    account: '/ad/user/Info'
   },
-  loginOut: '/ad/loginOut',
-  getVerifycode: {
-    phone: '/ad/getVerifycode/phone',
-    email: '/ad/getVerifycode/email'
+  data: {
+    getIndicators: '/ad/data/indicators'
   },
-  register: {
-    phone: '/ad/register/phone',
-    email: '/ad/register/email',
-    info: '/ad/register/setInfo'
+  verify: {
+    phone: '/ad/verify/phonecode',
+    email: '/ad/verify/emailcode'
   },
-  account: '/ad/accountInfo',
-  adData: '/ad/indicators',
   promotion: {
     list: '/ad/promotion/list',
     del: '/ad/promotion/del'

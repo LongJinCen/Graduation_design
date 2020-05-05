@@ -233,8 +233,10 @@
 
 <script>
 import * as regexp from '@/const/regexp.js'
-// import rules from '../common/rule.js'
+import rules from '../common/rule.js'
 import industrys from '@/const/industry.js'
+import apis from '@/const/api.js'
+import axios from 'axios'
 export default {
   name: 'Register',
   data () {
@@ -252,13 +254,13 @@ export default {
         industry: []
       },
       formRules: {
-        // email: rules.email,
-        // password: rules.password,
-        // confirmPassword: rules.password,
-        // verifycode: rules.verifycode,
-        // phoneNumber: rules.phoneNumber,
-        // accountName: rules.accountName,
-        // industry: rules.industry
+        email: rules.email,
+        password: rules.password,
+        confirmPassword: rules.password,
+        verifycode: rules.verifycode,
+        phoneNumber: rules.phoneNumber,
+        accountName: rules.accountName,
+        industry: rules.industry
       },
       timer: null,
       verifying: false,
@@ -302,7 +304,20 @@ export default {
       if (this.active === 2) {
         promise = this.setAccountInfo()
       }
-      promise.then(() => {
+      promise.then((data) => {
+        if (data.data.code === -1) {
+          this.$message({
+            message: data.data.message,
+            type: 'error'
+          })
+          return
+        }
+        if (this.active === 1) {
+          this.$message({
+            message: data.data.message,
+            type: 'success'
+          })
+        }
         this.resetFormData()
         this.resetTimer()
         this.formNext()
@@ -337,6 +352,7 @@ export default {
       }
     },
     getVerifyCodeByPhone () {
+      this.curRegisterType = 'phone'
       if (this.form.phoneNumber.length === 0) {
         this.$message({
           message: '请输入手机号',
@@ -355,6 +371,7 @@ export default {
       this.getVerifycode()
     },
     getVerifyCodeByEmail () {
+      this.curRegisterType = 'email'
       if (this.form.email.length === 0) {
         this.$message({
           message: '请输入邮箱',
@@ -362,7 +379,7 @@ export default {
         })
         return
       }
-      if (!regexp.email.test(this.form.phoneNumber)) {
+      if (!regexp.email.test(this.form.email)) {
         this.$message({
           message: '邮箱格式不正确',
           type: 'warning'
@@ -373,12 +390,37 @@ export default {
       this.getVerifycode()
     },
     getVerifycode () {
-      // TODO: 调用接口获取验证码
       if (this.curRegisterType === 'phone') {
-
+        axios.post(apis.verify.phone, { phoneNumber: this.form.phoneNumber })
+          .then((data) => {
+            if (data.data.code === -1) {
+              this.$message({
+                message: data.data.message,
+                type: 'error'
+              })
+            } else {
+              this.$message({
+                message: data.data.message,
+                type: 'success'
+              })
+            }
+          })
       }
       if (this.curRegisterType === 'email') {
-
+        axios.post(apis.verify.email, { email: this.form.email })
+          .then((data) => {
+            if (data.data.code === -1) {
+              this.$message({
+                message: data.data.message,
+                type: 'error'
+              })
+            } else {
+              this.$message({
+                message: data.data.message,
+                type: 'success'
+              })
+            }
+          })
       }
     },
     countdown () {
@@ -401,16 +443,14 @@ export default {
       const data = {}
       data.phoneNumber = this.form.phoneNumber
       data.verifycode = this.form.verifycode
-      // TODO: 调用接口
-      return Promise.resolve()
+      return axios.post(apis.user.registerWithPhone, data)
     },
     registerWithEmail () {
       const data = {}
       data.email = this.form.email
       data.password = this.form.password
-      data.confirmPassword = this.form.confirmPassword
       data.verifycode = this.form.verifycode
-      if (data.password.trim() !== data.confirmPassword.trim()) {
+      if (data.password.trim() !== this.form.confirmPassword.trim()) {
         this.$message({
           message: '密码不一致',
           type: 'warning'
@@ -418,15 +458,13 @@ export default {
         // eslint-disable-next-line
         return Promise.reject()
       }
-      // TODO: 调用接口
-      return Promise.resolve()
+      return axios.post(apis.user.registerWithEmail, data)
     },
     setAccountInfo () {
       const data = {}
       data.accountName = this.form.accountName
       data.industry = this.form.industry
-      // TODO: 调用接口
-      return Promise.resolve()
+      return axios.post(apis.user.setInfo, data)
     }
   }
 }

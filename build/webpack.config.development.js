@@ -15,6 +15,9 @@ module.exports = webpackMerge(baseConfig, {
     // },
     port: 8888,
     host: '127.0.0.1',
-    openPage: `${config.development.publicPath.slice(1)}index.html`
+    openPage: `${config.development.publicPath.slice(1)}index.html`,
+    proxy: {
+      '/ad': 'http://127.0.0.1:3000'
+    }
   }
 })

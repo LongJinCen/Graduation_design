@@ -98,6 +98,8 @@
 <script>
 import rules from '../common/rule.js'
 import * as regexp from '@/const/regexp.js'
+import apis from '@/const/api.js'
+import axios from 'axios'
 export default {
   name: 'Login',
   data () {
@@ -135,23 +137,34 @@ export default {
   methods: {
     login () {
       let formType = ''
+      let url = ''
       const data = {}
       if (this.emailLogin) {
         formType = 'Form1'
         data.email = this.form.email
         data.password = this.form.password
+        url = apis.user.loginWithEmail
       }
       if (this.phoneLogin) {
         formType = 'Form2'
         data.verifycode = this.form.verifycode
         data.phoneNumber = this.form.phoneNumber
+        url = apis.user.loginWithPhone
       }
       this.$refs[formType].validate((valid) => {
         if (!valid) {
           return
         }
-        // TODO: 调用登录接口
-        this.redirectToIndex()
+        axios.post(url, data).then((data) => {
+          if (data.data.code === 0) {
+            this.redirectToIndex()
+          } else {
+            this.$message({
+              message: data.data.message,
+              type: 'error'
+            })
+          }
+        })
       })
     },
     redirectToIndex () {
@@ -164,7 +177,21 @@ export default {
       this.$router.push('/forget')
     },
     getVerifyCode () {
-      // TODO: 发借口获取验证码
+      axios.post(apis.verify.phone, {
+        phoneNumber: this.form.phoneNumber
+      }).then((data) => {
+        if (data.data.code === 0) {
+          this.$message({
+            message: data.data.message,
+            type: 'success'
+          })
+        } else {
+          this.$message({
+            message: data.data.message,
+            type: 'error'
+          })
+        }
+      })
     },
     getVerifyCodeByPhone () {
       if (this.form.phoneNumber.length === 0) {

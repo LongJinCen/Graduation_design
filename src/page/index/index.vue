@@ -154,6 +154,8 @@ import Layout from '@/component/layout/layout.vue'
 import Navigator from '@/component/navigator/navigator.vue'
 import { dateRangeKey, dateOptions, adIndicators } from '@/page/common.js'
 import userIcon from '../../../assets/userIcon.svg'
+import axios from 'axios'
+import apis from '@/const/api'
 export default {
   name: 'Login',
   components: {
@@ -193,10 +195,16 @@ export default {
   },
   methods: {
     getAccountData () {
-      // TODO: 发送接口获取帐户信息
+      axios.get(apis.user.account).then((data) => {
+        console.log(data)
+      })
     },
     getAdIndicators (value) {
-      // TODO: 获取广告各项指标
+      axios.get(apis.data.getIndicators).then((data) => {
+        if (data.code === 0) {
+          this.account = data
+        }
+      })
     },
     newAd () {
       location.href = '/ad/promotion.html'
