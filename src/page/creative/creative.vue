@@ -90,7 +90,7 @@
                 :on-success="handleSuccess"
                 :file-list="detail.fileList"
                 :limit="1"
-                action="#"
+                action="/ad/creative/upload"
               >
                 <i class="el-icon-plus" />
               </el-upload>
@@ -134,6 +134,8 @@ import Layout from '@/component/layout/layout.vue'
 import Navigator from '@/component/navigator/navigator.vue'
 import * as tool from '@/util/tool.js'
 import { convertTargetKey, convertTarget } from '@/page/common.js'
+import axios from 'axios'
+import apis from '@/const/api.js'
 export default {
   name: 'Creative',
   components: {
@@ -179,9 +181,22 @@ export default {
   methods: {
     getDetail () {
       if (this.query.mode === 'create') {
-
+        return
       }
-      // TODO: 调用接口获取信息
+      axios.get(apis.creative.create, {
+        params: {
+          creativeId: this.query.id
+        }
+      }).then(data => {
+        if (data.data.code === 0) {
+          console.log(data.data, 'data.data')
+        } else {
+          this.$message({
+            message: data.data.message,
+            type: 'error'
+          })
+        }
+      })
     },
     getQuery () {
       this.query = tool.getQuery(location.search)

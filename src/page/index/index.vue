@@ -10,10 +10,10 @@
           >
           <div class="account absolute-vertical-center">
             <div class="one-line-overflow">
-              {{ account.username }}
+              {{ account.accountName }}
             </div>
             <div class="one-line-overflow">
-              ID：{{ account.userId }}
+              ID：{{ account._id }}
             </div>
           </div>
         </div>
@@ -165,8 +165,8 @@ export default {
   data () {
     return {
       account: {
-        username: '隆金岑',
-        userId: '1234567878',
+        accountName: '隆金岑',
+        _id: '1234567878',
         balance: 2000,
         consumption: 100,
         budget: 500,
@@ -196,13 +196,13 @@ export default {
   methods: {
     getAccountData () {
       axios.get(apis.user.account).then((data) => {
-        console.log(data)
+        this.account = data.data
       })
     },
     getAdIndicators (value) {
       axios.get(apis.data.getIndicators).then((data) => {
-        if (data.code === 0) {
-          this.account = data
+        if (data.data.code === 0) {
+          this.adIndicatorsValue = data.data.data[0]
         }
       })
     },
@@ -240,7 +240,7 @@ export default {
 
     & > div {
       height: 72px;
-      width: 220px;
+      width: 250px;
     }
 
     &-info {

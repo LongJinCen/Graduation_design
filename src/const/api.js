@@ -21,6 +21,7 @@ export default {
   },
   creative: {
     data: '/ad/creative/data',
-    upload: '/ad/creative/upload'
+    upload: '/ad/creative/upload',
+    create: '/ad/creative/create'
   }
 }

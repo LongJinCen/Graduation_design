@@ -64,16 +64,20 @@ export default {
   methods: {
     getAccountData() {
       axios.get(apis.user.account).then((data) => {
-        console.log(data)
+        data = data.data
+        this.account.name = data.accountName
+        this.account.id = data._id
       })
     },
     redirect (type) {
+      console.log(type, 'type')
       switch (type) {
         case 'index':
           this.activeIndex = 1
           location.href = '/ad/index.html'
           break
         case 'promotion':
+        case 'creative':
           this.activeIndex = 2
           location.href = '/ad/promotion.html'
           break
@@ -91,6 +95,7 @@ export default {
           this.activeIndex = 1
           break
         case 'promotion':
+        case 'creative':
           this.activeIndex = 2
           break
         default:
@@ -101,10 +106,10 @@ export default {
       switch (command) {
         case 'loginOut':
           axios.post(apis.user.loginOut).then((data) => {
-            if (data.code === 0) {
+            if (data.data.code === 0) {
               this.redirect('login')
             } else {
-              this.$message(data.message)
+              this.$message(data.data.message)
             }
           })
           break;

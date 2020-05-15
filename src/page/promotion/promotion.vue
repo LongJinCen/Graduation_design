@@ -115,6 +115,8 @@
 import Layout from '@/component/layout/layout.vue'
 import Navigator from '@/component/navigator/navigator.vue'
 import { dateRange, dateLabel, dateRangeKey, adIndicators, adStatus, adStatusKey } from '@/page/common.js'
+import axios from 'axios'
+import apis from '@/const/api.js'
 export default {
   name: 'Promotion',
   components: {
@@ -129,7 +131,9 @@ export default {
         budget: 500
       },
       filters: {
-        daterange: []
+        daterange: [],
+        page: 1,
+        limit: 10
       },
       pickerOptions: {
         shortcuts: [{
@@ -216,7 +220,7 @@ export default {
   },
   mounted () {
     this.getAccountData()
-    this.getTableData()
+    // this.getTableData()
   },
   methods: {
     dateChange () {
@@ -226,14 +230,30 @@ export default {
       window.open('/ad/creative.html?mode=create')
     },
     getAccountData () {
-      // TODO: 发送接口获取帐户信息
+      axios.get(apis.user.account).then((data) => {
+        this.account = data.data
+      })
     },
-    getTableData () {
-      // TODO: 获取 tabledata
+    getTableData (params) {
+      axios.get(apis.promotion.list, {
+        params: {
+          ...params,
+          page: this.filters.page,
+          limit: this.filters.limit,
+          start: this.filters.daterange[0],
+          end: this.filters.daterange[1]
+        }
+      })
+        .then(data => {
+          console.log(data, 'data')
+          this.tableData = data.data.data
+        })
     },
-    sortChange (prop, sort) {
-      console.log(prop, sort)
-      this.getTableData()
+    sortChange (prop) {
+      this.getTableData({
+        orderWord: prop.prop,
+        order: prop.order === 'ascending' ? 'asc' : 'dec'
+      })
     },
     edit (row) {
       window.open(`/ad/creative.html?mode=edit&id=${row.id}`)
