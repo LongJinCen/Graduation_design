@@ -6,8 +6,12 @@
   "scripts": {
     "dev": "npm run format && NODE_ENV=development webpack-dev-server --progress --color --config build/webpack.config.development.js",
     "format": "standardx --fix",
-    "build": "npm run format && NODE_ENV=production webpack --config build/webpack.config.production.js",
-    "navigator": "node build/webpack.config.navigator.js"
+    "buildPro": "npm run format && NODE_ENV=production webpack --config build/webpack.config.production.js",
+    "buildDev": "npm run format && NODE_ENV=development webpack --config build/webpack.config.production.js",
+    "navigator": "node build/webpack.config.navigator.js",
+    "stats": "NODE_ENV=production webpack --json > stats.json --config build/webpack.config.production.js",
+    "analyze": "webpack-bundle-analyzer stats.json ./dist",
+    "dll": "webpack --config build/webpack.config.dll.js"
   },
   "repository": {
     "type": "git",
@@ -49,9 +53,11 @@
     "vue-loader": "^15.9.1",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.42.1",
+    "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
+    "webpack-manifest-plugin": "^2.2.0",
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
@@ -59,7 +65,7 @@
     "@babel/runtime": "^7.9.2",
     "@babel/runtime-corejs3": "^7.9.2",
     "axios": "^0.19.2",
-    "element-ui": "^2.13.1",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "vue-router": "^3.1.6"
   },
@@ -77,7 +83,8 @@
       ".gitignore",
       "package-lock.json",
       "package.json",
-      "README.md"
+      "README.md",
+      "dll_main.js"
     ]
   },
   "lint-staged": {

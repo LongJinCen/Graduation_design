@@ -86,7 +86,6 @@
                 ref="upload"
                 list-type="picture-card"
                 :on-preview="handlePictureCardPreview"
-                :on-remove="handleRemove"
                 :on-success="handleSuccess"
                 :file-list="detail.fileList"
                 :limit="1"
@@ -146,7 +145,7 @@ export default {
     return {
       query: {},
       detail: {
-        name: '名称',
+        name: '',
         budget: 0,
         price: 0.00,
         convertTarget: '',
@@ -183,13 +182,13 @@ export default {
       if (this.query.mode === 'create') {
         return
       }
-      axios.get(apis.creative.create, {
+      axios.get(apis.creative.data, {
         params: {
           creativeId: this.query.id
         }
       }).then(data => {
         if (data.data.code === 0) {
-          console.log(data.data, 'data.data')
+          this.detail = data.data.data
         } else {
           this.$message({
             message: data.data.message,
@@ -205,19 +204,30 @@ export default {
       this.dialogImageUrl = file.url
       this.dialogVisible = true
     },
-    handleRemove (file, fileList) {
-    },
     handleSuccess (response, file, fileList) {
-      console.log(response)
+      this.detail.fileList.push({
+        url: response.url
+      })
     },
     async submit () {
       const valid1 = await this.$refs.form1.validate()
       const valid2 = await this.$refs.form2.validate()
       if (!valid1 || !valid2) {
-
+        return
       }
-      // TODO: 调用接口发送数据
-      location.href = '/ad/promotion.html'
+      let result = null
+      if (this.query.mode === 'create') {
+        result = await axios.post(apis.creative.create, this.detail)
+      } else {
+        result = await axios.post(apis.creative.update, this.detail)
+      }
+      if (result.data.code === 0) {
+        this.$message({
+          type: 'success',
+          message: result.data.message
+        })
+        location.href = '/ad/promotion.html'
+      }
     }
   }
 }

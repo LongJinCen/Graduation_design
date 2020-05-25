@@ -10,5 +10,11 @@ module.exports = {
   },
   creative: {
     path: './src/page/creative/creative.js'
+  },
+  testSite1: {
+    path: './src/page/testSite1/testSite1.js'
+  },
+  treeShaking: {
+    path: './src/treeShaking/index.js'
   }
 }

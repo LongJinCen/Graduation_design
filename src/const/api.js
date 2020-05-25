@@ -22,6 +22,11 @@ export default {
   creative: {
     data: '/ad/creative/data',
     upload: '/ad/creative/upload',
-    create: '/ad/creative/create'
+    create: '/ad/creative/create',
+    update: '/ad/creative/update',
+    updateIndicator: '/ad/creative/updateIndicator'
+  },
+  bidding: {
+    getAd: '/ad/bidding'
   }
 }

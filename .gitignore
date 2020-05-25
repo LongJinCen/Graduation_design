@@ -1,5 +1,8 @@
 node_modules
 .vscode
-./dist
+dist/*
 ./navigator
 compilation-stats.json
+build/*
+dll*
+stats.json

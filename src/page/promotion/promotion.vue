@@ -45,11 +45,11 @@
           @sort-change="sortChange"
         >
           <el-table-column
-            prop="id"
+            prop="_id"
             label="ID"
           />
           <el-table-column
-            prop="createDate"
+            prop="createTime"
             label="创建日期"
             sortable="custom"
           />
@@ -93,16 +93,6 @@
           <el-table-column
             :prop="adIndicators.clickRate.key"
             :label="adIndicators.clickRate.label"
-            sortable="custom"
-          />
-          <el-table-column
-            :prop="adIndicators.convertNums.key"
-            :label="adIndicators.convertNums.label"
-            sortable="custom"
-          />
-          <el-table-column
-            :prop="adIndicators.convertRate.key"
-            :label="adIndicators.convertRate.label"
             sortable="custom"
           />
         </el-table>
@@ -178,37 +168,7 @@ export default {
           }
         }]
       },
-      tableData: [{
-        id: '234567',
-        createDate: '2018-09-10',
-        status: 1,
-        consumption: 100,
-        show: 2000000,
-        clickNums: 20000,
-        clickRate: '20%',
-        convertNums: 1000,
-        convertRate: '1%'
-      }, {
-        id: '234567',
-        createDate: '2018-09-10',
-        status: 2,
-        consumption: 100,
-        show: 2000000,
-        clickNums: 20000,
-        clickRate: '20%',
-        convertNums: 1000,
-        convertRate: '1%'
-      }, {
-        id: '234567',
-        createDate: '2018-09-10',
-        status: 3,
-        consumption: 100,
-        show: 2000000,
-        clickNums: 20000,
-        clickRate: '20%',
-        convertNums: 1000,
-        convertRate: '1%'
-      }],
+      tableData: [],
       adIndicators,
       adStatus,
       stautsClass: {
@@ -220,7 +180,7 @@ export default {
   },
   mounted () {
     this.getAccountData()
-    // this.getTableData()
+    this.getTableData()
   },
   methods: {
     dateChange () {
@@ -245,7 +205,6 @@ export default {
         }
       })
         .then(data => {
-          console.log(data, 'data')
           this.tableData = data.data.data
         })
     },
@@ -256,12 +215,29 @@ export default {
       })
     },
     edit (row) {
-      window.open(`/ad/creative.html?mode=edit&id=${row.id}`)
+      window.open(`/ad/creative.html?mode=edit&id=${row._id}`)
     },
     del (row) {
       this.$confirm('确认删除？')
         .then(() => {
-          // TODO:调用删除接口
+          return axios.delete(apis.promotion.del, {
+            params: {
+              creativeId: row._id
+            }
+          }).then((data) => {
+            if (data.data.code === 0) {
+              this.$message({
+                type: 'success',
+                message: '删除成功'
+              })
+            } else {
+              this.$message({
+                type: 'error',
+                message: '删除失败'
+              })
+            }
+            this.getTableData()
+          })
         })
         .catch(() => {
 

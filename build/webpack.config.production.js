@@ -2,27 +2,15 @@ const webpackMerge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base.js')
 
 module.exports = webpackMerge(baseConfig, {
-  devtool: 'source-map',
+  // devtool: 'source-map',
+  output: {
+    pathinfo: false // 关闭输出路径信息路径信息
+  },
   optimization: {
+    moduleIds: 'hashed', // 模块 id 跟顺序有关，为了保证 moduleId 不变，这里使用 hashed
     splitChunks: {
-      chunks: 'all',
-      minSize: 30000,
-      minChunks: 2,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      automaticNameDelimiter: '~', // 分割符
-      name: true,
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10
-        },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
-        }
-      }
-    }
+      chunks: 'all'
+    },
+    runtimeChunk: 'single'
   }
 })

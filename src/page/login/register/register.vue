@@ -335,6 +335,7 @@ export default {
       }
     },
     resetTimer () {
+      clearInterval(this.timer)
       this.timer = null
       this.verifying = false
       this.second = 60
@@ -424,6 +425,7 @@ export default {
       }
     },
     countdown () {
+      this.second = 60
       if (this.timer) {
         return
       }

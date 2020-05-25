@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <navigator />
+    <navigator :test-obj="testObj" />
     <div class="index">
       <div class="index-part1 index-common flex flex-vertical-center">
         <div class="index-part1-info relative clear-float">
@@ -186,10 +186,19 @@ export default {
         convertNums: 0,
         convertRate: 0
       },
-      userIcon
+      userIcon,
+      testObj: {
+        name: 'longjicnen',
+        age: 18
+      }
     }
   },
+  created () {
+    console.log('index created')
+    this.testObj = { name: 'liulan', age: 'fjdslkf' }
+  },
   mounted () {
+    console.log('index mounted')
     this.getAccountData()
     this.getAdIndicators()
   },

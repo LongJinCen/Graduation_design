@@ -136,6 +136,7 @@ export default {
   },
   methods: {
     login () {
+      console.log('fdsfds')
       let formType = ''
       let url = ''
       const data = {}

@@ -88,15 +88,15 @@ export const adIndicators = {
   clickRate: {
     label: '点击率',
     key: 'clickRate'
-  },
-  convertNums: {
-    label: '转化数',
-    key: 'convertNums'
-  },
-  convertRate: {
-    label: '转换率',
-    key: 'convertRate'
   }
+  // convertNums: {
+  //   label: '转化数',
+  //   key: 'convertNums'
+  // },
+  // convertRate: {
+  //   label: '转换率',
+  //   key: 'convertRate'
+  // }
 }
 
 export const adStatusKey = {

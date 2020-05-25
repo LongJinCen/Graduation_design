@@ -39,6 +39,14 @@ import apis from '@/const/api.js'
 
 export default {
   name: 'Navigator',
+  props: {
+    testObj: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    },
+  },
   data () {
     return {
       activeIndex: 1,
